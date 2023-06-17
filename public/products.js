@@ -1,4 +1,4 @@
-import { addRenderer, get, div, p, button, changeItemCountInCart, getItemCountInCart } from "./app.js";
+import { addRenderer, queueRender, get, div, p, button, changeItemCountInCart, getItemCountInCart } from "./app.js";
 
 function getSortMode() {
 	return document.getElementById("inputSortMode").value;
@@ -24,9 +24,14 @@ let products;
 
 async function renderProductsList(sortMode) {
 
+	console.log("a");
+
 	products.sort(sortFuncs[sortMode]);
 
-	const elms = products.map((product) => div({class:"product"}, [
+	const filterVal = document.getElementById("searchInput").value || "";
+	const regExp = new RegExp(filterVal, "i")
+
+	const elms = products.filter(p => p.name.match(regExp)).map((product) => div({class:"product"}, [
 		p({},[product.name]),
 		p({},[`${product.cost}$`]),
 		button({
@@ -65,4 +70,8 @@ addRenderer(updateProductList);
 
 document.getElementById("inputSortMode").addEventListener("change", () => {
 	updateProductList();
+})
+
+document.getElementById("searchInput").addEventListener("input", () => {
+	queueRender();
 })

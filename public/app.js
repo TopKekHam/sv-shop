@@ -100,7 +100,7 @@ export function addRenderer(renderer) {
   renderers.push(renderer);
 }
 
-function queueRender() {
+export function queueRender() {
   if (needToRenderer === false) {
     window.requestAnimationFrame(() => {
       doRender();
