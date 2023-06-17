@@ -35,11 +35,3 @@ const orderScheme = mongoose.Schema({
 export const userModel  = connection.model("Users", userScheme);
 export const productModel  = connection.model("Products", productScheme);
 export const orderModel  = connection.model("Orders", orderScheme);
-
-// const studentScheme = mongoose.Schema({
-// 	id: String,
-// 	name: String,
-// 	age: Number,
-// });
-
-// const studentModel  = connection.model("students", studentScheme);
