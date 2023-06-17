@@ -1,16 +1,14 @@
 
-[] Database
+[v] Database
 
 = AMIT
 
-	[] CSS / design
-	[] Register Page
-	[] Admin Page
+	[x] CSS / design
+	[x] Register Page
+	[x] Admin Page
 
 =
 
-	[] Login Page
-	[] Products Page
-	[] Approve Page
-
-	
+	[x] Login Page
+	[x] Products Page
+	[x] Approve Page
