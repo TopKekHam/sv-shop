@@ -9,6 +9,6 @@
 
 =
 
-	[x] Login Page
-	[x] Products Page
-	[x] Approve Page
+	[v] Login Page
+	[v] Products Page
+	[v] Approve Page
