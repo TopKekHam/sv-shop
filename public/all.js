@@ -1,3 +1,30 @@
+/*
+	we can make code shorter is we use functions from app.js
+	example:
+	
+	import {get, p, h3, h4} from "./app.js";
+	
+	const showExistsOrders2 = async () =>{
+		const div = document.getElementById("existsOrders").value;
+		
+		let data;
+		
+		try {
+			data = await get("/existsOrders");
+		} catch(err) {
+			console.log(err)
+		}
+		
+		data.Orders.forEach(order => {
+			div.append(
+				h3({}, [order.userEmail]), 
+				p({}, [order.products]), 
+				h4({}, [`total price: ${order.totalPrice}`]));
+			});
+		}
+		
+*/
+
 const showExistsOrders = () =>{
     const div = document.getElementById("existsOrders").value;
     fetch("/existsOrders", {

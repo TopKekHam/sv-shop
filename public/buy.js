@@ -18,6 +18,8 @@ function getTotalCount() {
   return itemsInCart.reduce((val, current) => val + current.count, 0);
 }
 
+
+// draw all data / updates DOM
 async function productsList() {
   if (!products) {
     products = await get("/data/products", true);
@@ -42,8 +44,10 @@ async function productsList() {
   list.append(...elms);
 }
 
+// add callback function to call each time data changes
 addRenderer(productsList);
 
+// approve button functionality
 document.getElementById("approveButton").addEventListener("click", (e) => {
   if (itemsInCart.length > 0) {
     post("/buy", { products: itemsInCart, totalPrice: getTotalPrice() });

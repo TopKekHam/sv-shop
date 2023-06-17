@@ -4,6 +4,7 @@ function getSortMode() {
 	return document.getElementById("inputSortMode").value;
 }
 
+// sorting function for product list
 const sortFuncs = {
 	name : (a, b) => {
 		const length = Math.min(a.name.length, b.name.length);
@@ -22,6 +23,7 @@ const sortFuncs = {
 
 let products;
 
+// creates list of all products
 async function renderProductsList(sortMode) {
 
 	console.log("a");
@@ -31,6 +33,7 @@ async function renderProductsList(sortMode) {
 	const filterVal = document.getElementById("searchInput").value || "";
 	const regExp = new RegExp(filterVal, "i")
 
+	// filters products by name -> creates div with data for each product
 	const elms = products.filter(p => p.name.match(regExp)).map((product) => div({class:"product"}, [
 		p({},[product.name]),
 		p({},[`${product.cost}$`]),
@@ -49,6 +52,7 @@ async function renderProductsList(sortMode) {
 	return elms;
 }
 
+// draw all data / updates DOM
 async function updateProductList() {
 
 	if(!products) {
@@ -66,12 +70,15 @@ async function updateProductList() {
 	})
 }
 
+// add callback function to call each time data changes
 addRenderer(updateProductList);
 
+// sort select functionality
 document.getElementById("inputSortMode").addEventListener("change", () => {
 	updateProductList();
 })
 
+// search input functionality
 document.getElementById("searchInput").addEventListener("input", () => {
 	queueRender();
 })

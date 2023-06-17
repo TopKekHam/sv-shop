@@ -1,6 +1,8 @@
+// fetch functions, makes code smaller
+
 const chache = new Map();
 
-function getChachedData(path, method) {
+function getChacheData(path, method) {
   return chache.get(method + ":" + path);
 }
 
@@ -12,7 +14,7 @@ export async function post(path, json, chached) {
   let data;
 
   if (chached) {
-    data = getChachedData(path);
+    data = getChacheData(path);
     if (data) return data;
   }
 
@@ -35,7 +37,7 @@ export async function get(path, chached) {
   let data;
 
   if (chached) {
-    data = getChachedData(path);
+    data = getChacheData(path);
     if (data) return data;
   }
 
@@ -55,6 +57,8 @@ export async function get(path, chached) {
 export function redirectRelative(path) {
   window.location.href = path;
 }
+
+// Auth functions
 
 export function setAuthToken(token) {
   document.cookie = `token=${token}`;
@@ -91,7 +95,7 @@ export function logout() {
   redirectRelative("/");
 }
 
-export let itemsInCart = [];
+// renderer functions, makes redrawing / updating DOM easier when data changes. 
 
 const renderers = [];
 let needToRenderer = false;
@@ -120,6 +124,11 @@ function doRender() {
   }
 }
 
+// Cart functions
+
+export let itemsInCart = [];
+
+// loading cart from localStorage
 {
   const json = localStorage.getItem("cart");
   if (json) {
@@ -132,6 +141,8 @@ export function clearCart() {
   localStorage.setItem("cart", "[]");
 }
 
+// update item count
+// param count is relative to current count.
 export function changeItemCountInCart(name, count) {
   queueRender();
 
@@ -155,6 +166,7 @@ export function changeItemCountInCart(name, count) {
   return count;
 }
 
+// get item count by name
 export function getItemCountInCart(name) {
   for (let i = 0; i < itemsInCart.length; i++) {
     if (itemsInCart[i].name === name) {
@@ -164,6 +176,8 @@ export function getItemCountInCart(name) {
 
   return 0;
 }
+
+// functions for DOM element creation, makes code shorter.
 
 export function element(tag, attributes, children) {
   const elm = document.createElement(tag);
@@ -206,3 +220,28 @@ export function input(attributes, children) {
 export function p(attributes, children) {
   return element("p", attributes, children);
 }
+
+export function a(attributes, children) {
+  return element("a", attributes, children);
+}
+
+export function h1(attributes, children) {
+  return element("h1", attributes, children);
+}
+
+export function h2(attributes, children) {
+  return element("h2", attributes, children);
+}
+
+export function h3(attributes, children) {
+  return element("h3", attributes, children);
+}
+
+export function h4(attributes, children) {
+  return element("h4", attributes, children);
+}
+
+export function h5(attributes, children) {
+  return element("h5", attributes, children);
+}
+
